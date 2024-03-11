@@ -18,6 +18,34 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('teste', function (){
-    return 'testee';
+
+Route::post('/teste', function (Request $request){
+    // $name = $request->input('name');
+    // return $name;
+    return $request->all();
 });
+
+// $request->all() = retorna todos os dados da request
+// $request->input() = retorna todos os inputs da request
+// $request->file() = retorna todos os arquivos da request
+// $request->all('name') = retorna um dado específico
+// $request->input('name') = retorna um input específico
+// $request->file('name') = retorna um arquivo específico
+// $request->only('name', 'age') = retorna os dados específicos
+// $request->except('name', 'age') = retorna todos os dados com exceção dos dados específicos
+
+
+
+// C R U D
+// Create -> método GET - retorna dados
+// Read -> método POST - cria algo
+// Update -> método PUT - atualiza algo
+// Delete -> método DELETE - deleta algo
+
+
+
+
+//camelCase
+//PascalCase
+//sanke_case
+//kebab-case
