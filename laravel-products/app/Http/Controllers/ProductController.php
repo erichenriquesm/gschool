@@ -2,23 +2,56 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    //all() - retorna todos os dados independente do tipo
-    //input() - retornar os dados digitáveis
-    //file() - retornar todos os dados de arquivos
-    //only('name', 'age') - retorna apenas os campos que quisermos
-    //except('name', 'age') - retorna todos os campos exceto o quer passarmos no método
-    public function teste(Request $request)
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
     {
-        //definir 2 variáveis (name e age) que vão conter as informções das proprieadades
+        //
+    }
 
-        $name = $request->input('name');
-        $age = $request->input('age');
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create(Request $request)
+    {
+        return Product::create($request->input());
+    }
 
-        return 'Olá, meu nome é ' . $name . ' e tenho ' . $age . ' anos de idade!';
+    /**
+     * Display the specified resource.
+     */
+    public function show(Product $product)
+    {
+        //
+    }
 
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Product $product)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Product $product)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Product $product)
+    {
+        //
     }
 }
