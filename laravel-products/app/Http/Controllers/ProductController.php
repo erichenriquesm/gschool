@@ -2,32 +2,48 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function test(Request $request)
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
     {
-        /**
-         * - Definir duas variáveis chamadas name e age e atribuir os valores que vierem da request
-         * - Retornar uma frase com esses dados concatenados
-         */
-        $name = $request->input('name'); // -> Define a variável nome
-        $age = $request->input('age'); // -> Define a variável idade
-        return "Meu nome é $name e eu tenho $age anos"; // Retorna a frase concatenada
+        //
     }
 
-    //camelCase
-    //PascalCase
-    //snake_case
-    //kebab-case
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        return Product::create($request->input());
+    }
 
-    //all() - retornar todas as informações da request, independente do tipo
+    /**
+     * Display the specified resource.
+     */
+    public function show(Product $product)
+    {
+        //
+    }
 
-    /*input() - retornar apenas os campos que vierem de um input, 
-se passar um parâmetro com o nome de um propriedade, será acessado o valor dela 
-*/
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Product $product)
+    {
+        //
+    }
 
-    //file() - retorna apenas os dados do tipo arquivo
-
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Product $product)
+    {
+        //
+    }
 }
