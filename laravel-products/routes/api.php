@@ -15,5 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-Route::post('/product', [ProductController::class, 'create']);
+Route::prefix('product')->controller(ProductController::class)->group(function() {
+    Route::post('', 'create');
+    Route::get('', 'index');
+    Route::get('/{product}', 'show');
+});

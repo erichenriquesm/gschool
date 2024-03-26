@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 50); // coluna do tipo string(cadeia de caracteres)
             $table->longText('description')->nullable(); // temos uma coluna do tipo longText, pois permite mais caracteres e ela será nula caso não seja passado um valor
-            $table->decimal('value', 8, 2, true); //coluna que nos permite salvar valores quebrados(15.99)
+            $table->decimal('amount', 8, 2, true); //coluna que nos permite salvar valores quebrados(15.99)
             $table->enum('status', ['inactive', 'active'])->default('active'); // coluna do tipo lista, definimos quais valores são permitidos, por padrão vai ser ativo
             $table->timestamps();
         });
