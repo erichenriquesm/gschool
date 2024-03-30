@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('seller_id')->references('id')->on('sellers')->onDelete('cascade')->onUpdate('cascade');
             $table->string('name', 50); // coluna do tipo string(cadeia de caracteres)
             $table->longText('description')->nullable(); // temos uma coluna do tipo longText, pois permite mais caracteres e ela será nula caso não seja passado um valor
             $table->decimal('amount', 8, 2, true); //coluna que nos permite salvar valores quebrados(15.99)

@@ -23,7 +23,8 @@ class ProductController extends Controller
     {
         $validation = Validator::make($request->all(), [
             'name' => 'required|string|min:3|max:30|unique:products,name',
-            'amount' => 'required|numeric'
+            'amount' => 'required|numeric',
+            'description' => 'string'
         ],
         [
             'name.required' => 'O campo nome é obrigatório',
@@ -39,6 +40,7 @@ class ProductController extends Controller
             'name' => $request->input('name'),
             'amount' => $request->input('amount'),
             'description' => $request->input('description'),
+            'seller_id' => $request->input('seller_id')
         ]);
 
         return response()->json([
@@ -56,19 +58,26 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Product $product)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $validation = Validator::make($request->all(), [
+            'name' => 'string|min:3|max:30|unique:products,name',
+            'amount' => 'numeric',
+            'description' => 'string',
+            'status' => 'string|in:active,inactive'
+        ]);
+
+        if($validation->fails()){
+            return response()->json($validation->errors(), 422);
+        }
+
+        $product->fill($request->input())->update();
+        return response()->json([
+            'message' => 'Product updated!',
+            'product' => $product 
+        ]);
     }
 
     /**
@@ -76,6 +85,9 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return response()->json([
+            'message' => 'Product deleted!'
+        ]);
     }
 }

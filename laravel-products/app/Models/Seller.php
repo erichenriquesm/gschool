@@ -5,17 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Seller extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
-        'email',
-        'password'
+        'email'
     ];
 
-    protected $hidden = [
-        'password'
-    ];
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'seller_id', 'id');
+    }
 }
+
