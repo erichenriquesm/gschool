@@ -22,6 +22,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/product', [ProductController::class, 'store']);
 
+Route::get('/product', [ProductController::class, 'index']);
+
+Route::get('/product/{product}', [ProductController::class, 'show']);
+
+Route::put('/product/{product}', [ProductController::class, 'update']);
+
+
+
 // $request->all() = retorna todos os dados da request
 // $request->input() = retorna todos os inputs da request
 // $request->file() = retorna todos os arquivos da request
