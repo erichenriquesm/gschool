@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Product;
+use App\Models\Seller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +17,26 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/one-to-many', function (){
+    $seller = Seller::find(1);
+
+    $seller->products()->create([
+        'name' => 'segundo produto',
+        'amount' => 2000,
+    ]);
+
+    $seller->refresh();
+
+    dd($seller->products->toArray());
+});
+
+
+Route::get('/one-to-many-inverse', function (){
+    $product = Product::find(2);
+
+    return $product->seller()->create();
+
+
 });
