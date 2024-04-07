@@ -13,7 +13,7 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        return response()->json(Product::paginate($request->input('per_page') ?? 10));
+        return response()->json(Product::with('seller')->paginate($request->input('per_page') ?? 10));
     }
 
     /**
@@ -24,7 +24,8 @@ class ProductController extends Controller
         $validation = Validator::make($request->all(), [
             'name' => 'required|string|min:3|max:40|unique:products,name',
             'amount' => 'required|numeric',
-            'description' => 'string'
+            'description' => 'string',
+            'seller_id' => 'required|integer|exists:sellers,id'
         ]);
 
         if($validation->fails()){
@@ -34,7 +35,8 @@ class ProductController extends Controller
         $product = Product::create([
             'name' => $request->input('name'),
             'amount' => $request->input('amount'),
-            'description' => $request->input('description')
+            'description' => $request->input('description'),
+            'description' => $request->input('description'),
         ]);
 
         return response()->json([
@@ -81,6 +83,16 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+
+        return response()->json([
+            'message' => 'Product deleted!'
+        ]);
     }
 }
+
+// 1 - 1 one to one
+
+// 1 - * one to many
+
+// * - * many to many
