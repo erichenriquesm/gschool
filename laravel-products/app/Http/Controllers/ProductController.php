@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\RegisterProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -29,23 +30,15 @@ class ProductController extends Controller
         [
             'name.required' => 'O campo nome é obrigatório',
             'name.unique' => 'O nome já está sendo utilizado'
-        ])
-        ;
+        ]);
 
         if($validation->fails()){
             return response()->json($validation->errors(), 422);
         }
 
-        $product = Product::create([
-            'name' => $request->input('name'),
-            'amount' => $request->input('amount'),
-            'description' => $request->input('description'),
-            'seller_id' => 1
-        ]);
-
         return response()->json([
             'message' => 'Product created!',
-            'product' => $product 
+            'product' => RegisterProduct::run($request->input('name'),  $request->input('amount'), $request->input('description'), 1)
         ]);
     }
 
